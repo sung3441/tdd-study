@@ -14,8 +14,8 @@ public class NumberTest {
         Number number1 = new Number(1);
         Number number9 = new Number(9);
 
-        assertThat(number1.getNumber()).isEqualTo(1);
-        assertThat(number9.getNumber()).isEqualTo(9);
+        assertThat(number1.value).isEqualTo(1);
+        assertThat(number9.value).isEqualTo(9);
     }
 
     @ParameterizedTest

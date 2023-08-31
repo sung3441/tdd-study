@@ -14,10 +14,10 @@ public class Ball {
     }
 
     public BallStatus compareTo(Ball ball) {
-        if (number.getNumber() != ball.number.getNumber()) {
+        if (number.value != ball.number.value) {
             return OUT;
         }
 
-        return position.getPosition() == ball.position.getPosition() ? STRIKE : BALL;
+        return position.value == ball.position.value ? STRIKE : BALL;
     }
 }

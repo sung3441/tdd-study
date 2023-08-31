@@ -12,7 +12,7 @@ public class PositionTest {
     @ValueSource(ints = {1, 2, 3})
     void 유효한_포지션(int number) {
         Position position = new Position(number);
-        assertThat(position.getPosition()).isEqualTo(number);
+        assertThat(position.value).isEqualTo(number);
     }
 
     @ParameterizedTest
