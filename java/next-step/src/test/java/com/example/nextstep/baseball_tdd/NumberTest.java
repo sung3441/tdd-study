@@ -1,6 +1,5 @@
 package com.example.nextstep.baseball_tdd;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -9,13 +8,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class NumberTest {
 
-    @Test
-    void 유효한_숫자() {
-        Number number1 = new Number(1);
-        Number number9 = new Number(9);
-
-        assertThat(number1.value).isEqualTo(1);
-        assertThat(number9.value).isEqualTo(9);
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 9})
+    void 유효한_숫자(int num) {
+        assertThat(new Number(num).value).isEqualTo(num);
     }
 
     @ParameterizedTest
