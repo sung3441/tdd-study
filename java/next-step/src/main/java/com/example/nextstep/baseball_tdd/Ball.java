@@ -20,4 +20,18 @@ public class Ball {
 
         return position.value == ball.position.value ? STRIKE : BALL;
     }
+
+    public void validationPosition(int index) {
+        if (position.value != index) {
+            throw new RuntimeException(String.format(
+                    "invalid ball position : this[%d], target[%d]",
+                    position.value,
+                    index
+            ));
+        }
+    }
+
+    public boolean compareNumber(Ball ball) {
+        return this.number.value == ball.number.value;
+    }
 }

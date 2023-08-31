@@ -1,11 +1,24 @@
 package com.example.nextstep.baseball_tdd;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class BallTest {
+
+    @Test
+    void 유효하지_않은_포지션() {
+        Ball ball = new Ball(
+                new Number(1),
+                new Position(1)
+        );
+
+        assertThatThrownBy(() -> ball.validationPosition(2))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("invalid ball position : this[1], target[2]");
+    }
 
     @ParameterizedTest
     @CsvSource(value = {"1:1:1:1", "2:2:1:1", "9:9:1:1"}, delimiter = ':')
