@@ -17,7 +17,7 @@ public class BallTest {
 
         assertThatThrownBy(() -> ball.validationPosition(2))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessage("invalid ball position : this[1], target[2]");
+                .hasMessage("invalid ball position : this[1], index[2]");
     }
 
     @ParameterizedTest

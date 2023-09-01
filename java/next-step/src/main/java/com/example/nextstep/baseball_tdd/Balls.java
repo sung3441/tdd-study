@@ -1,46 +1,66 @@
 package com.example.nextstep.baseball_tdd;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Objects;
+
+import static com.example.nextstep.baseball_tdd.BallStatus.*;
 
 public class Balls {
 
-    private final List<Ball> balls;
+    private final Ball[] balls;
 
-    public Balls(List<Ball> balls) {
+    public Balls(Ball ... balls) {
         this.balls = balls;
+        validations();
+    }
+
+    public BallResult play(Balls playerBalls) {
+        BallResult ballResult = new BallResult();
+
+        for (Ball playerBall : playerBalls.balls) {
+            ballResult.increment(compareBall(playerBall));
+        }
+
+        return ballResult;
+    }
+
+    private BallStatus compareBall(Ball playerBall) {
+        return Arrays.stream(balls)
+                .map(ball -> ball.compareTo(playerBall))
+                .filter(status -> !status.equals(OUT))
+                .findFirst()
+                .orElse(OUT);
+    }
+
+    private void validations() {
+        nullCheck();
         validationSize();
         validationPosition();
         duplicateBalls();
     }
 
-    public BallResult play(Balls playerBalls) {
-        for (Ball playerBall : playerBalls.balls) {
-
+    private void nullCheck() {
+        if (Arrays.stream(balls).anyMatch(Objects::isNull)) {
+            throw new RuntimeException("balls has null");
         }
-
-        return new BallResult(0, 0);
     }
 
     private void validationSize() {
-        if (balls == null) {
-            throw new RuntimeException("balls is null");
-        }
-
-        if (balls.size() != 3) {
-            throw new RuntimeException(String.format("invalid balls size : %d", balls.size()));
+        if (balls.length != 3) {
+            throw new RuntimeException(String.format("invalid balls size : %d", balls.length));
         }
     }
 
     private void validationPosition() {
-        for (int index = 0; index < balls.size(); index++) {
-            balls.get(index).validationPosition(index + 1);
+        for (int index = 0; index < balls.length; index++) {
+            balls[index].validationPosition(index + 1);
         }
     }
 
     private void duplicateBalls() {
-        if (balls.get(0).compareNumber(balls.get(1))
-                || balls.get(1).compareNumber(balls.get(2))
-                || balls.get(0).compareNumber(balls.get(2))) {
+        if (balls[0].compareNumber(balls[1])
+                || balls[1].compareNumber(balls[2])
+                || balls[0].compareNumber(balls[2])) {
             throw new RuntimeException("duplicate ball number");
         }
     }

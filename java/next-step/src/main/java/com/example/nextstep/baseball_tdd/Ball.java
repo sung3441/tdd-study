@@ -24,7 +24,7 @@ public class Ball {
     public void validationPosition(int index) {
         if (position.value != index) {
             throw new RuntimeException(String.format(
-                    "invalid ball position : this[%d], target[%d]",
+                    "invalid ball position : this[%d], index[%d]",
                     position.value,
                     index
             ));
