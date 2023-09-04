@@ -1,12 +1,10 @@
 package com.example.nextstep.string_add_calculator;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-
 
     public static int calculate(String text) {
 
@@ -14,14 +12,17 @@ public class StringAddCalculator {
             return 0;
         }
 
-        if (isNumeric(text)) {
-            return Integer.parseInt(text);
+        return sum(splitBySeparator(text));
+    }
+
+    private static int sum(int[] numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            checkNegative(number);
+            sum += number;
         }
 
-        int[] numbers = splitBySeparator(text);
-
-        return Arrays.stream(numbers)
-                .sum();
+        return sum;
     }
 
     private static int[] splitBySeparator(String text) {
@@ -45,16 +46,9 @@ public class StringAddCalculator {
         return text == null || text.isEmpty();
     }
 
-    private static boolean hasSeparator(String text) {
-        return text.contains(",") || text.contains(":");
-    }
-
-    private static boolean isNumeric(String text) {
-        try {
-            Integer.parseInt(text);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    private static void checkNegative(int number) {
+        if (number < 0) {
+            throw new RuntimeException(String.format("%d is negative", number));
         }
     }
 }
