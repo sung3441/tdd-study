@@ -58,9 +58,9 @@ public class Balls {
     }
 
     private void duplicateBalls() {
-        if (balls[0].compareNumber(balls[1])
-                || balls[1].compareNumber(balls[2])
-                || balls[0].compareNumber(balls[2])) {
+        if (balls[0].isSameNumber(balls[1])
+                || balls[1].isSameNumber(balls[2])
+                || balls[0].isSameNumber(balls[2])) {
             throw new RuntimeException("duplicate ball number");
         }
     }

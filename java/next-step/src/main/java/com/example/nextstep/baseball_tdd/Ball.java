@@ -14,7 +14,7 @@ public class Ball {
     }
 
     public BallStatus compareTo(Ball ball) {
-        if (number.value != ball.number.value) {
+        if (!number.isSame(ball.number)) {
             return OUT;
         }
 
@@ -31,7 +31,7 @@ public class Ball {
         }
     }
 
-    public boolean compareNumber(Ball ball) {
-        return this.number.value == ball.number.value;
+    public boolean isSameNumber(Ball ball) {
+        return this.number.isSame(ball.number);
     }
 }

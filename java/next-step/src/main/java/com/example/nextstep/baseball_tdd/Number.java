@@ -10,4 +10,8 @@ public class Number {
         }
         this.value = number;
     }
+
+    public boolean isSame(Number number) {
+        return value == number.value;
+    }
 }
